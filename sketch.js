@@ -1,4 +1,3 @@
-
 var PLAY = 1;
 var END = 0;
 var gameState = PLAY;
@@ -30,14 +29,16 @@ function setup() {
   scene.scale = 2.5
   
   // creating bow to shoot arrow
-  bow = createSprite(380,220,20,50);
+  bow = createSprite(360,220,20,40);
   bow.addImage(bowImage); 
   bow.scale = 1;
   
    score = 0  
- //redB= new Group();
- 
- // arrowGroup= new Group();
+ redB= new Group();
+ pinkB= new Group();
+ greenB= new Group();
+ blueB=new Group();
+ arrowGroup= new Group();
 
   
 }
@@ -54,7 +55,28 @@ function draw() {
       // // moving ground
       // scene.velocityX = -3 
       //destroy bow
-       bow.destroy(arrow);
+        if(arrowGroup.isTouching(redB))
+       {
+         redB.destroyEach()
+
+
+       }
+       if(arrowGroup.isTouching(pinkB))
+       {
+         pinkB.destroyEach()
+
+       }
+       if(arrowGroup.isTouching(greenB))
+       {
+         greenB.destroyEach()
+
+       }
+       if(arrowGroup.isTouching(blueB))
+       {
+         blueB.destroyEach()
+
+       }
+       //bow.destroy();
        //reset the background
        if (scene.x < 0){
          scene.x = scene.width/2;
@@ -95,20 +117,20 @@ function draw() {
       // // moving ground
       // scene.velocityX = -3 
       // //destroy bow
-      // bow.destroy();
+       bow.destroy();
       // //reset the background
        if (scene.x < 0){
          scene.x = scene.width/2;
           }
       // //moving bow
-      //bow.y = World.mouseY      
+      bow.y = World.mouseY      
       // //stop background movement
       scene.velocityX = 0;
 
   }
 
-if (frameCount>1000) {
-  //red.destroyEach();
+if (frameCount>100000) {
+  red.destroyEach();
   gameState=END; 
 }
 
@@ -138,7 +160,7 @@ function redBalloon() {
   red.velocityX = 3;
   red.lifetime = 150;
   red.scale = 0.1;
-//  redB.add(red);
+  redB.add(red);
 }
 
 function blueBalloon() {
@@ -147,6 +169,7 @@ function blueBalloon() {
   blue.velocityX = 3;
   blue.lifetime = 150;
   blue.scale = 0.1;
+  blueB.add(blue)
 }
 
 function greenBalloon() {
@@ -155,6 +178,7 @@ function greenBalloon() {
   green.velocityX = 3;
   green.lifetime = 150;
   green.scale = 0.1;
+  greenB.add(green)
 }
 
 function pinkBalloon() {
@@ -163,7 +187,7 @@ function pinkBalloon() {
   pink.velocityX = 3;
   pink.lifetime = 150;
   pink.scale = 1
-
+ pinkB.add(pink)
 }
 
 // Creating  arrows for bow
@@ -175,6 +199,8 @@ function pinkBalloon() {
   arrow.velocityX = -4;
   arrow.lifetime = 100;
   arrow.scale = 0.3;
-//  arrowGroup.add(arrow);
+  arrowGroup.add(arrow);
 
 }
+
+
